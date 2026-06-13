@@ -1,0 +1,19 @@
+.root {
+}
+
+.itemList {
+  display: flex;
+}
+
+.empty {
+}
+
+.vertical {
+  flex-direction: column;
+  gap: calc(var(--vertical-gap) * 2);
+}
+
+.horizontal {
+  flex-direction: row;
+  gap: calc(var(--horizontal-gap) * 2);
+}
