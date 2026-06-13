@@ -1,22 +1,22 @@
 import { BlogPost } from "@/app/components/page/blog/model/blogPost"
+import { List } from "@/app/components/widget/list/list"
+import { Padding } from "@/app/components/widget/padding/padding"
 import { joinCss } from "@/app/lib/utils"
-import { ReactNode } from "react"
 import styles from "./blogDetail.module.css"
 
-export const BlogDetail = ({
-  metadata,
-  content,
-}: {
-  metadata: BlogPost
-  content: ReactNode
-}) => {
+export const BlogDetail = ({ blogPost }: { blogPost: BlogPost }) => {
+  if (!blogPost) throw new Error("BlogDetail: blogPost is undefined")
+
   return (
-    <article className={joinCss(styles.root)}>
-      <h3 className={joinCss(styles.title)}>{metadata.title}</h3>
-      {/* TODO */}
-      <div className={joinCss(styles.content)}>{content}</div>
-    </article>
+    <Padding>
+      <List>
+        <Padding>
+          <h3 className={joinCss(styles.title)}>{blogPost.title}</h3>
+        </Padding>
+        <Padding>
+          <div className={joinCss(styles.content)}>{blogPost.content}</div>
+        </Padding>
+      </List>
+    </Padding>
   )
 }
-
-export default BlogDetail

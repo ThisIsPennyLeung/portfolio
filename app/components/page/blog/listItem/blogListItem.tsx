@@ -1,28 +1,20 @@
-import { List } from "@/app/components/widget/list/list"
-import { Padding } from "@/app/components/widget/padding/padding"
+import { BlogDetail } from "@/app/components/page/blog/detail/blogDetail"
+import { BlogPost } from "@/app/components/page/blog/model/blogPost"
+import { Link } from "@/app/components/widget/link/link"
 import { joinCss } from "@/app/lib/utils"
-import { ReactNode } from "react"
 import styles from "./blogListItem.module.css"
 
-export const BlogListItem = ({
-  title,
-  content,
-}: {
-  title: string
-  content: ReactNode
-}) => {
+export const BlogListItem = ({ blogPost }: { blogPost: BlogPost }) => {
+  if (!blogPost) throw new Error("BlogListItem: blogPost is undefined")
+
   return (
-    <article className={joinCss(styles.root)}>
-      <Padding>
-        <List>
-          <Padding>
-            <h3 className={joinCss(styles.title)}>{title}</h3>
-          </Padding>
-          <Padding>
-            <div className={joinCss(styles.content)}>{content}</div>
-          </Padding>
-        </List>
-      </Padding>
-    </article>
+    <Link
+      href={`/blog/${blogPost.slug}`}
+      cssClasses={joinCss(styles.root, styles.link)}
+    >
+      <article>
+        <BlogDetail blogPost={blogPost} />
+      </article>
+    </Link>
   )
 }
