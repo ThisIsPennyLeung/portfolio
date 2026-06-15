@@ -1,0 +1,20 @@
+name: Build
+
+runs:
+  using: composite
+  steps:
+    - uses: ./.github/actions/setup
+
+    - name: Lint
+      shell: bash
+      run: pnpm lint
+
+    - name: Build
+      shell: bash
+      run: pnpm build
+
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: out
+        path: out/

@@ -1,0 +1,21 @@
+name: Deploy
+
+inputs:
+  cloudflare_account_id:
+    description: https://dash.cloudflare.com/<account_id>/
+    required: true
+  cloudflare_api_token:
+    description: |
+      [Edit] Workers Scripts
+      [Edit] Workers Routes
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Deploy to Cloudflare Workers
+      shell: bash
+      run: pnpm deploy
+      env:
+        CLOUDFLARE_ACCOUNT_ID: ${{ inputs.cloudflare_account_id }}
+        CLOUDFLARE_API_TOKEN: ${{ inputs.cloudflare_api_token }}
