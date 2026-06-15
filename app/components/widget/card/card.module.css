@@ -1,0 +1,8 @@
+.root {
+  --card-border-radius: 1.5rem;
+
+  background-color: var(--glass-background-color);
+  backdrop-filter: var(--glass-backdrop-filter);
+
+  border-radius: var(--card-border-radius);
+}
