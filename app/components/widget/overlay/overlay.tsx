@@ -1,3 +1,4 @@
+import { Expanded } from "@/app/components/widget/expanded/expanded"
 import { CssClassesType, joinCss } from "@/app/lib/utils"
 import { CSSProperties, ReactNode } from "react"
 import styles from "./overlay.module.css"
@@ -53,7 +54,7 @@ export const Overlay = ({
     <div className={joinCss(cssClasses, styles.root)}>
       {before}
       <div className={styles.children}>
-        <div className={styles.restore}>{children}</div>
+        <Expanded cssClasses={styles.restore}>{children}</Expanded>
       </div>
       {after}
     </div>
