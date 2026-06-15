@@ -1,3 +1,4 @@
+import { Background } from "@/app/components/widget/background/background"
 import { Expanded } from "@/app/components/widget/expanded/expanded"
 import { Padding } from "@/app/components/widget/padding/padding"
 import { joinCss } from "@/app/lib/utils"
@@ -29,9 +30,11 @@ const RootLayout = ({
     <html lang="en" className={joinCss(geistSans.variable, geistMono.variable)}>
       <body>
         <Expanded>
-          <Padding direction="immediateUnderRoot">
-            <Expanded>{children}</Expanded>
-          </Padding>
+          <Background>
+            <Padding direction="immediateUnderRoot">
+              <Expanded>{children}</Expanded>
+            </Padding>
+          </Background>
         </Expanded>
       </body>
     </html>
