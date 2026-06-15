@@ -8,15 +8,11 @@ export const BlogDetail = ({ blogPost }: { blogPost: BlogPost }) => {
   if (!blogPost) throw new Error("BlogDetail: blogPost is undefined")
 
   return (
-    <Padding>
-      <List>
-        <Padding>
-          <h3 className={joinCss(styles.title)}>{blogPost.title}</h3>
-        </Padding>
-        <Padding>
-          <div className={joinCss(styles.content)}>{blogPost.content}</div>
-        </Padding>
-      </List>
-    </Padding>
+    <List>
+      <Padding>
+        <h3 className={joinCss(styles.title)}>{blogPost.title}</h3>
+        <div className={joinCss(styles.content)}>{blogPost.content}</div>
+      </Padding>
+    </List>
   )
 }

@@ -9,10 +9,15 @@ export const Padding = ({
 }: {
   children?: ReactNode
   cssClasses?: CssClassesType
-  direction?: "vertical" | "horizontal" | "both" | "immediateUnderRoot"
+  direction?:
+    | "vertical"
+    | "horizontal"
+    | "both"
+    | "immediateUnderRoot"
+    | "immediateUnderCard"
 }) => {
   return (
-    <div className={joinCss(cssClasses, styles.padding, styles[direction])}>
+    <div className={joinCss(cssClasses, styles.root, styles[direction])}>
       {children}
     </div>
   )
