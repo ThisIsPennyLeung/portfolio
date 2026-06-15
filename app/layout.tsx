@@ -1,9 +1,11 @@
-import { Background } from "@/app/components/widget/background/background"
-import { Expanded } from "@/app/components/widget/expanded/expanded"
-import { Padding } from "@/app/components/widget/padding/padding"
-import { joinCss } from "@/app/lib/utils"
+import { RootLayout as PageRootLayout } from "@/app/_components/page/RootLayout"
+import { Background } from "@/app/_components/widget/background/background"
+import { Expanded } from "@/app/_components/widget/expanded/expanded"
+import { Padding } from "@/app/_components/widget/padding/padding"
+import { joinCss } from "@/app/_lib/utils"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import { ReactNode } from "react"
 import "./globals.css"
 
 const geistSans = Geist({
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
 const RootLayout = ({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) => {
   return (
     <html lang="en" className={joinCss(geistSans.variable, geistMono.variable)}>
@@ -32,7 +34,9 @@ const RootLayout = ({
         <Expanded>
           <Background>
             <Padding direction="immediateUnderRoot">
-              <Expanded>{children}</Expanded>
+              <Expanded>
+                <PageRootLayout>{children}</PageRootLayout>
+              </Expanded>
             </Padding>
           </Background>
         </Expanded>

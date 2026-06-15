@@ -8,6 +8,7 @@ Targe roll this out before 22-June
 
 - [x] CI/CD
 - [x] WIP message, can view it on production
+- [x] Folder structure
 - [ ] Layout, Blog page, Summary
 - [ ] Blog content
 - [ ] Test

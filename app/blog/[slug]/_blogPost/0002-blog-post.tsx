@@ -1,4 +1,4 @@
-import { BlogPost } from "@/app/components/page/blog/model/blogPost"
+import { BlogPost } from "@/app/_components/page/blog/model/blogPost"
 
 export const blogPost: BlogPost = {
   order: 2,

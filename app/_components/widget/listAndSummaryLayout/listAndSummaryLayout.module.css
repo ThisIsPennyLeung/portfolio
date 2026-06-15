@@ -1,0 +1,37 @@
+.root {
+  display: grid;
+  justify-content: center;
+
+  grid-template-columns: 60% 30%;
+  grid-template-rows: 12.5% 1fr;
+  grid-template-areas:
+    ". ."
+    "list summary";
+}
+
+@container style(--is-mobile: true) {
+  .root {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(100px, auto) 1fr;
+    grid-template-areas:
+      "summary"
+      "list";
+  }
+}
+
+.list {
+  grid-area: list;
+}
+.summary {
+  grid-area: summary;
+}
+
+.root.debug > * {
+  border: 1px solid red;
+}
+.root.debug > * > * {
+  border: 1px solid blue;
+}
+.root.debug > * > * > * {
+  border: 1px solid black;
+}
