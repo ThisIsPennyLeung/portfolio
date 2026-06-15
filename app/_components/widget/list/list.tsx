@@ -1,5 +1,10 @@
 import { Center } from "@/app/_components/widget/center/center"
-import { CssClassesType, isEmptyArray, joinCss } from "@/app/_lib/utils"
+import { Padding } from "@/app/_components/widget/padding/padding"
+import {
+  CssClassesType,
+  isObjectOrArrayContainValue,
+  joinCss,
+} from "@/app/_lib/utils"
 import { ReactNode } from "react"
 import styles from "./list.module.css"
 
@@ -21,7 +26,11 @@ const ItemList = ({
 
 const EmptyItemList = ({ emptyMessage }: { emptyMessage?: string }) => {
   const message = emptyMessage || "No items available"
-  return <Center cssClasses={styles.empty}>{message}</Center>
+  return (
+    <Padding>
+      <Center cssClasses={styles.empty}>{message}</Center>
+    </Padding>
+  )
 }
 
 export const List = ({
@@ -35,7 +44,7 @@ export const List = ({
   cssClasses?: CssClassesType
   direction?: directionEnum
 }) => {
-  const isEmpty = isEmptyArray(children)
+  const isEmpty = !isObjectOrArrayContainValue(children)
   const content = isEmpty ? (
     <EmptyItemList emptyMessage={emptyMessage} />
   ) : (

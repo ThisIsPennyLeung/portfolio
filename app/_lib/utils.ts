@@ -5,10 +5,22 @@ import path from "path"
 // String //
 ////////////
 
-export const isEmptyArray = (value: unknown): boolean => {
-  if (!value) return true
-  if (!Array.isArray(value)) return true
-  if (value.length === 0) return true
+export const isObject = (value: unknown): boolean => {
+  if (value === null || value === undefined) return false
+  if (Array.isArray(value)) return false
+  if (typeof value === "object") return true
+  return false
+}
+
+export const isArray = (value: unknown): boolean => {
+  if (Array.isArray(value)) return true
+  return false
+}
+
+export const isObjectOrArrayContainValue = (value: unknown): boolean => {
+  if (isObject(value)) return true
+  if (isArray(value) && (value as unknown[]).length > 0) return true
+  console.log(value)
   return false
 }
 
