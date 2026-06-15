@@ -3,5 +3,19 @@
   "useTabs": false,
   "tabWidth": 2,
   "semi": false,
-  "singleQuote": false
+  "singleQuote": false,
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "requirePragma": true
+      }
+    },
+    {
+      "files": "wrangler.jsonc",
+      "options": {
+        "trailingComma": "none"
+      }
+    }
+  ]
 }
