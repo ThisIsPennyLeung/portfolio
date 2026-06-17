@@ -12,6 +12,12 @@
       }
     },
     {
+      "files": "app/blog/[slug]/_blogPost/*.tsx",
+      "options": {
+        "requirePragma": true
+      }
+    },
+    {
       "files": "wrangler.jsonc",
       "options": {
         "trailingComma": "none"
