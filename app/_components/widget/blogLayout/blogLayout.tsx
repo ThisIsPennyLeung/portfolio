@@ -1,5 +1,4 @@
 import { Expanded } from "@/app/_components/widget/expanded/expanded"
-import { Padding } from "@/app/_components/widget/padding/padding"
 import { CssClassesType, joinCss } from "@/app/_lib/utils"
 import { ReactNode } from "react"
 import styles from "./blogLayout.module.css"
@@ -19,21 +18,15 @@ export const BlogLayout = ({
 
   return (
     <div className={joinCss(cssClasses, styles.root, debugCss)}>
-      <Expanded cssClasses={[styles.title]}>
-        <Padding>
-          <Expanded>{title}</Expanded>
-        </Padding>
-      </Expanded>
-      <Expanded cssClasses={[styles.blogPosts]}>
-        <Padding>
-          <Expanded>{blogPosts}</Expanded>
-        </Padding>
-      </Expanded>
-      <Expanded cssClasses={[styles.tag]}>
-        <Padding>
-          <Expanded>{tag}</Expanded>
-        </Padding>
-      </Expanded>
+      <div className={joinCss([styles.title])}>
+        <Expanded>{title}</Expanded>
+      </div>
+      <div className={joinCss([styles.blogPosts])}>
+        <Expanded>{blogPosts}</Expanded>
+      </div>
+      <div className={joinCss([styles.tag])}>
+        <Expanded>{tag}</Expanded>
+      </div>
     </div>
   )
 }

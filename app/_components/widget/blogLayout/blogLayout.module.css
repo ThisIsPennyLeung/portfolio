@@ -5,7 +5,9 @@
 
   display: grid;
   justify-content: center;
-  gap: calc(var(--vertical-gap) * 4) calc(var(--horizontal-gap) * 2);
+
+  padding: var(--vertical-gap) var(--horizontal-gap);
+  gap: calc(var(--vertical-gap) * 4) calc(var(--horizontal-gap) * 4);
 
   grid-template-columns: 1fr 20%;
   grid-template-rows: 12.5% 1fr;
