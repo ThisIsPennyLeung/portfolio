@@ -1,15 +1,16 @@
 import { BlogPost } from "@/app/_components/page/blog/model/blogPost"
-import { getTypescriptFileNamesInFolder } from "@/app/_lib/utils"
+import { getImportNamesInFolder } from "@/app/_lib/utils"
 
 export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   const path = "app/blog/[slug]/_blogPost"
-  const files = getTypescriptFileNamesInFolder(path)
+  const extension = ".tsx"
+  const files = getImportNamesInFolder(path, extension)
 
   // Hint: `import` need nearly hardcoded path, otherelse will get `Error: Cannot find module as expression is too dynamic`
   const posts = (
     await Promise.all(
       files.map(async (x) => {
-        const fileInstance = await import(`@/${path}/${x}`)
+        const fileInstance = await import(`@/${path}/${x}${extension}`)
         return fileInstance.blogPost as BlogPost
       })
     )

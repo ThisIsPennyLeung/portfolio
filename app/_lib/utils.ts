@@ -54,18 +54,29 @@ const joinPaths = (...paths: string[]): string => {
 
 const getFileNamesInFolderByExtension = (
   dictionaryPath: string,
-  extensions: string[]
+  {
+    extension = "",
+    omittedFileNameExtension = false,
+  }: { extension?: string; omittedFileNameExtension?: boolean } = {}
 ): string[] => {
   const path = joinPaths(process.cwd(), dictionaryPath)
   preventPathTraversal(path)
 
-  const results = fs
-    .readdirSync(path)
-    .filter((f) => extensions.some((ext) => f.endsWith(ext)))
+  let temp = fs.readdirSync(path)
+  if (extension) temp = temp.filter((x) => x.endsWith(extension))
+  if (omittedFileNameExtension)
+    temp = temp.map((x) => x.replace(/\.[^/.]+$/, ""))
 
+  const results = temp
   return results
 }
 
-export const getTypescriptFileNamesInFolder = (
-  dictionaryPath: string
-): string[] => getFileNamesInFolderByExtension(dictionaryPath, [".ts", ".tsx"])
+// Hint: `import` need nearly hardcoded path, otherelse will get `Error: Cannot find module as expression is too dynamic`
+export const getImportNamesInFolder = (
+  dictionaryPath: string,
+  extension: string
+): string[] =>
+  getFileNamesInFolderByExtension(dictionaryPath, {
+    extension,
+    omittedFileNameExtension: true,
+  })
