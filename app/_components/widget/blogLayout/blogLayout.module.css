@@ -12,7 +12,7 @@
   grid-template-columns: 1fr 20%;
   grid-template-rows: min-content 1fr;
   grid-template-areas:
-    "title title"
+    "blogPosts biography"
     "blogPosts tag";
 }
 
@@ -21,14 +21,14 @@
     grid-template-columns: 1fr;
     grid-template-rows: min-content 1fr min-content;
     grid-template-areas:
-      "title"
+      "biography"
       "blogPosts"
       "tag";
   }
 }
 
-.title {
-  grid-area: title;
+.biography {
+  grid-area: biography;
 }
 .blogPosts {
   grid-area: blogPosts;

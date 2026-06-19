@@ -4,10 +4,14 @@ import { Center } from "@/app/_components/widget/center/center"
 import { Expanded } from "@/app/_components/widget/expanded/expanded"
 import { Padding } from "@/app/_components/widget/padding/padding"
 import { joinCss } from "@/app/_lib/utils"
+import { config as fontawesomeConfig } from "@fortawesome/fontawesome-svg-core"
+import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { ReactNode } from "react"
 import "./globals.css"
+
+fontawesomeConfig.autoAddCss = false
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

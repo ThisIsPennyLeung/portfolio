@@ -4,12 +4,12 @@ import { ReactNode } from "react"
 import styles from "./blogLayout.module.css"
 
 export const BlogLayout = ({
-  title,
+  biography,
   blogPosts,
   tag,
   cssClasses,
 }: {
-  title: ReactNode
+  biography: ReactNode
   blogPosts: ReactNode
   cssClasses?: CssClassesType
   tag: ReactNode
@@ -18,8 +18,8 @@ export const BlogLayout = ({
 
   return (
     <div className={joinCss(cssClasses, styles.root, debugCss)}>
-      <div className={joinCss([styles.title])}>
-        <Expanded>{title}</Expanded>
+      <div className={joinCss([styles.biography])}>
+        <Expanded>{biography}</Expanded>
       </div>
       <div className={joinCss([styles.blogPosts])}>
         <Expanded>{blogPosts}</Expanded>

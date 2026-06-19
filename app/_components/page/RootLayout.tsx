@@ -7,7 +7,7 @@ import { ReactNode } from "react"
 export const RootLayout = ({ children }: { children: ReactNode }) => {
   return (
     <BlogLayout
-      title={<Biography />}
+      biography={<Biography />}
       blogPosts={<List>{children}</List>}
       tag={<Tag />}
     />
