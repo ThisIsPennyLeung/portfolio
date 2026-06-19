@@ -22,7 +22,10 @@
 
 /* back: margin outside body tag will make body tag shifted */
 .immediateUnderRoot {
-  max-height: calc(100% - var(--vertical-padding) * 2);
+  border: unset;
+
+  /* -2px is some border out of body, I don't want overflow: hidden and make the scroll again */
+  max-height: calc(100% - var(--vertical-padding) * 2 - 2px);
 
   padding-top: var(--vertical-padding);
   padding-bottom: var(--vertical-padding);

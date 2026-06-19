@@ -1,5 +1,6 @@
 import { RootLayout as PageRootLayout } from "@/app/_components/page/RootLayout"
 import { Background } from "@/app/_components/widget/background/background"
+import { Center } from "@/app/_components/widget/center/center"
 import { Expanded } from "@/app/_components/widget/expanded/expanded"
 import { Padding } from "@/app/_components/widget/padding/padding"
 import { joinCss } from "@/app/_lib/utils"
@@ -34,9 +35,9 @@ const RootLayout = ({
         <Expanded>
           <Background>
             <Padding direction="immediateUnderRoot">
-              <Expanded>
+              <Center axis="horizontal">
                 <PageRootLayout>{children}</PageRootLayout>
-              </Expanded>
+              </Center>
             </Padding>
           </Background>
         </Expanded>

@@ -1,16 +1,16 @@
 .center {
   display: flex;
+  justify-content: center;
 }
 
 .horizontal {
-  justify-content: center;
+  flex-direction: row;
 }
 
 .vertical {
-  align-items: center;
+  flex-direction: column;
 }
 
 .both {
-  justify-content: center;
   align-items: center;
 }
