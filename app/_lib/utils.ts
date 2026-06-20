@@ -52,17 +52,25 @@ const joinPaths = (...paths: string[]): string => {
   return joinedPath
 }
 
-const getFileNamesInFolderByExtension = (
+/*turbopackIgnore: true*/
+const getFileNamesInFolderByExtension = async (
   dictionaryPath: string,
   {
     extension = "",
     omittedFileNameExtension = false,
-  }: { extension?: string; omittedFileNameExtension?: boolean } = {}
-): string[] => {
+    recursive = false,
+  }: {
+    extension?: string
+    omittedFileNameExtension?: boolean
+    recursive?: boolean
+  } = {}
+): Promise<string[]> => {
   const path = joinPaths(process.cwd(), dictionaryPath)
   preventPathTraversal(path)
 
-  let temp = fs.readdirSync(path)
+  let temp = await fs.promises.readdir(path, {
+    recursive: recursive,
+  })
   if (extension) temp = temp.filter((x) => x.endsWith(extension))
   if (omittedFileNameExtension)
     temp = temp.map((x) => x.replace(/\.[^/.]+$/, ""))
@@ -72,11 +80,12 @@ const getFileNamesInFolderByExtension = (
 }
 
 // Hint: `import` need nearly hardcoded path, otherelse will get `Error: Cannot find module as expression is too dynamic`
-export const getImportNamesInFolder = (
+export const getImportNamesInFolder = async (
   dictionaryPath: string,
   extension: string
-): string[] =>
-  getFileNamesInFolderByExtension(dictionaryPath, {
+): Promise<string[]> =>
+  await getFileNamesInFolderByExtension(dictionaryPath, {
     extension,
     omittedFileNameExtension: true,
+    recursive: true,
   })
