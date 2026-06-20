@@ -1,13 +1,17 @@
 import { getImportNamesInFolder } from "@/app/_lib/serverUtils"
+import { toSlug } from "@/app/_lib/utils"
 import { ComponentType } from "react"
 
-export interface BlogPost {
-  order: number
+interface BlogPostMarkdown {
   publish: boolean
-  slug: string
   title: string
-  summary: string
+  tags: string[]
+}
+
+export type BlogPost = BlogPostMarkdown & {
+  // runtime
   content: ComponentType
+  slug: string
 }
 
 export const getAllBlogPosts = async (
@@ -21,19 +25,25 @@ export const getAllBlogPosts = async (
   const posts = (
     await Promise.all(
       files.map(async (x) => {
-        const imported = await import(`@/${path}/${x}${extension}`)
+        const fullPath = `@/${path}/${x}${extension}`
+        const { frontmatter: markdown, default: content } = await import(
+          fullPath
+        )
         const blogPost = {
-          ...imported.frontmatter,
-          content: imported.default,
+          ...markdown,
+          //
+          content,
+          slug: toSlug(markdown.title),
         } as BlogPost
 
         if (!blogPost.publish && !includeUnpublish) return null
-        return blogPost
+        return { fullPath, blogPost }
       })
     )
   )
     .filter((x) => !!x)
-    .sort((a, b) => b.order - a?.order)
+    .sort((a, b) => a.fullPath.localeCompare(b.fullPath))
+    .map((x) => x.blogPost)
 
   return posts
 }

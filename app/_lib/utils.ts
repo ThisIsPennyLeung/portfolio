@@ -29,3 +29,13 @@ export const joinCss = (
     .filter((x) => x)
     .join(" ")
 }
+
+export const toSlug = (slug: string) => {
+  const url = slug
+    .toLowerCase()
+    .replace(/['"]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+  const result = encodeURIComponent(url)
+  return result
+}
