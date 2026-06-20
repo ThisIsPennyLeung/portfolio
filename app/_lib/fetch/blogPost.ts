@@ -3,13 +3,16 @@ import { ComponentType } from "react"
 
 export interface BlogPost {
   order: number
+  publish: boolean
   slug: string
   title: string
   summary: string
   content: ComponentType
 }
 
-export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
+export const getAllBlogPosts = async (
+  includeUnpublish = false
+): Promise<BlogPost[]> => {
   const path = "app/_lib/fetch/blogPost"
   const extension = ".md"
   const files = await getImportNamesInFolder(path, extension)
@@ -23,10 +26,14 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
           ...imported.frontmatter,
           content: imported.default,
         } as BlogPost
+
+        if (!blogPost.publish && !includeUnpublish) return null
         return blogPost
       })
     )
-  ).sort((a, b) => b.order - a.order)
+  )
+    .filter((x) => !!x)
+    .sort((a, b) => b.order - a?.order)
 
   return posts
 }
