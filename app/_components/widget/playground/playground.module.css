@@ -1,0 +1,29 @@
+.root {
+  border: 1px solid black;
+  background-color: var(--playground-bacground-color);
+}
+
+.grid {
+  display: grid;
+
+  gap: calc(var(--vertical-gap) * 2);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "liveEditor livePreview";
+}
+
+.liveEditor {
+  grid-area: liveEditor;
+}
+
+.livePreview {
+  grid-area: livePreview;
+}
+
+/* hint: override react-live, that used style can't override */
+pre.liveElement,
+.liveElement > pre {
+  background-color: unset !important;
+  padding: unset !important;
+  margin: unset !important;
+}
