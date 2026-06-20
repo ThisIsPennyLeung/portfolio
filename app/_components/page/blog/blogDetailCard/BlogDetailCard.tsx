@@ -1,6 +1,6 @@
-import { BlogPost } from "@/app/_components/page/blog/model/blogPost"
 import { Card } from "@/app/_components/widget/card/card"
 import { List } from "@/app/_components/widget/list/list"
+import { BlogPost } from "@/app/_lib/fetch/blogPost"
 
 export const BlogDetailCard = ({ blogPost }: { blogPost: BlogPost }) => {
   const Content = blogPost.content

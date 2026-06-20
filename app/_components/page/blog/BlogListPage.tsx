@@ -1,8 +1,7 @@
 import { BlogDetailCard } from "@/app/_components/page/blog/blogDetailCard/BlogDetailCard"
-import { BlogPost } from "@/app/_components/page/blog/model/blogPost"
 import { Link } from "@/app/_components/widget/link/link"
 import { List } from "@/app/_components/widget/list/list"
-import { getAllBlogPosts } from "@/app/_lib/fetch/blogPost"
+import { BlogPost, getAllBlogPosts } from "@/app/_lib/fetch/blogPost"
 
 const BlogListItem = ({ blogPost }: { blogPost: BlogPost }) => {
   if (!blogPost) throw new Error("BlogListItem: blogPost is undefined")
