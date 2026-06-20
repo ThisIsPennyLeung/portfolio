@@ -9,5 +9,4 @@ export const generateStaticParams = async () => {
 const Page = async ({ params }: { params: { slug: string } }) => {
   return <BlogDetailPage params={params} />
 }
-
 export default Page

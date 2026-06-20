@@ -1,11 +1,14 @@
 ---
-order: 1
-slug: "blog-post-0001"
-title: "Talidwind "
-summary: "Don't write a css class like ingredients label"
+publish: true
+title: "Day 0, Don't write a class like ingredients label"
+tags:
+  - Frontend
 ---
 
-It's so long and no one know [change edited text]
+It's so long and no one know 
+```
+[TBC]
+```
 
 Talidwind is good to make the developer have a common knowledge for design, but I think this copy and paste on css class is not a good idea
 it's hard to read and worry about will it identical in all the pages
