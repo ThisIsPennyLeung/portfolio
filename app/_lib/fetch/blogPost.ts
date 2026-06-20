@@ -1,5 +1,13 @@
-import { BlogPost } from "@/app/_components/page/blog/model/blogPost"
-import { getImportNamesInFolder } from "@/app/_lib/utils"
+import { getImportNamesInFolder } from "@/app/_lib/serverUtils"
+import { ComponentType } from "react"
+
+export interface BlogPost {
+  order: number
+  slug: string
+  title: string
+  summary: string
+  content: ComponentType
+}
 
 export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
   const path = "app/_lib/fetch/blogPost"
@@ -11,7 +19,6 @@ export const getAllBlogPosts = async (): Promise<BlogPost[]> => {
     await Promise.all(
       files.map(async (x) => {
         const imported = await import(`@/${path}/${x}${extension}`)
-        console.log(JSON.stringify(imported))
         const blogPost = {
           ...imported.frontmatter,
           content: imported.default,
