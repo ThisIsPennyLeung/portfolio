@@ -17,6 +17,8 @@
   --glass-backdrop-filter: blur(2px);
 
   color: hsl(0, 0%, 95%);
+
+  --playground-background-color: rgba(0, 0, 0, 0.3);
 }
 
 /******************
