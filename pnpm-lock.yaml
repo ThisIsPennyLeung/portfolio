@@ -23,6 +23,9 @@ importers:
       '@mdx-js/loader':
         specifier: ^3.1.1
         version: 3.1.1
+      '@mdx-js/mdx':
+        specifier: ^3.1.1
+        version: 3.1.1
       '@mdx-js/react':
         specifier: ^3.1.1
         version: 3.1.1(@types/react@19.2.17)(react@19.2.4)
@@ -47,6 +50,9 @@ importers:
       react-live:
         specifier: ^4.1.8
         version: 4.1.8(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      rehype-truncate:
+        specifier: ^1.2.2
+        version: 1.2.2
       remark-frontmatter:
         specifier: ^5.0.0
         version: 5.0.0
@@ -2197,6 +2203,9 @@ packages:
 
   rehype-recma@1.0.0:
     resolution: {integrity: sha512-lqA4rGUf1JmacCNWWZx0Wv1dHqMwxzsDWYMTowuplHF3xH0N/MmrZ/G3BDZnzAkRmxDadujCjaKM2hqYdCBOGw==}
+
+  rehype-truncate@1.2.2:
+    resolution: {integrity: sha512-zj2FxxC3rm8bg6loesMdS/+BuGpp89mu+12VsJrBzN5kKgOxKwtawscQXElyt2BnxU2pG3hkoyb3Euc3Q7F38A==}
 
   remark-frontmatter@5.0.0:
     resolution: {integrity: sha512-XTFYvNASMe5iPN0719nPrdItC9aU0ssC4v14mH1BCi1u0n1gAocqcujWUrByftZTbLhRtiKRyjYTSIOcr69UVQ==}
@@ -5051,6 +5060,8 @@ snapshots:
       hast-util-to-estree: 3.1.3
     transitivePeerDependencies:
       - supports-color
+
+  rehype-truncate@1.2.2: {}
 
   remark-frontmatter@5.0.0:
     dependencies:

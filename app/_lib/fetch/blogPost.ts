@@ -1,51 +1,28 @@
-import { getImportNamesInFolder } from "@/app/_lib/serverUtils"
+import { readMarkdown, ReadMarkdownType } from "@/app/_lib/serverUtils"
 import { toSlug } from "@/app/_lib/utils"
-import { ComponentType } from "react"
 
-interface BlogPostMarkdown {
+interface BlogPostMeta {
   publish: boolean
   title: string
   tags: string[]
 }
 
-export type BlogPost = BlogPostMarkdown & {
-  // runtime
-  content: ComponentType
+export type BlogPost = ReadMarkdownType<BlogPostMeta> & {
   slug: string
 }
 
-export const getAllBlogPosts = async (
-  includeUnpublish = false
-): Promise<BlogPost[]> => {
-  const path = "app/_lib/fetch/blogPost"
-  const extension = ".md"
-  const files = await getImportNamesInFolder(path, extension)
+export const getAllBlogPosts = async ({
+  includeUnpublish = false,
+} = {}): Promise<BlogPost[]> => {
+  const blogPosts = await readMarkdown<BlogPostMeta>("app/_lib/fetch/blogPost")
+  const result = blogPosts
+    .filter((x) => includeUnpublish || x.meta.publish)
+    .map((x) => {
+      return { ...x, slug: toSlug(x.meta.title) }
+    })
+    .sort((a, b) => a.meta.fullPath.localeCompare(b.meta.fullPath))
 
-  // Hint: `import` need nearly hardcoded path, otherelse will get `Error: Cannot find module as expression is too dynamic`
-  const posts = (
-    await Promise.all(
-      files.map(async (x) => {
-        const fullPath = `@/${path}/${x}${extension}`
-        const { frontmatter: markdown, default: content } = await import(
-          fullPath
-        )
-        const blogPost = {
-          ...markdown,
-          //
-          content,
-          slug: toSlug(markdown.title),
-        } as BlogPost
-
-        if (!blogPost.publish && !includeUnpublish) return null
-        return { fullPath, blogPost }
-      })
-    )
-  )
-    .filter((x) => !!x)
-    .sort((a, b) => a.fullPath.localeCompare(b.fullPath))
-    .map((x) => x.blogPost)
-
-  return posts
+  return result
 }
 
 export const getBlogPostBySlug = async (slug: string): Promise<BlogPost> => {
