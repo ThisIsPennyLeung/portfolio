@@ -8,7 +8,7 @@ const BlogListItem = ({ blogPost }: { blogPost: BlogPost }) => {
 
   return (
     <Link href={`/blog/${blogPost.slug}`}>
-      <BlogDetailCard blogPost={blogPost} />
+      <BlogDetailCard blogPost={blogPost} truncated />
     </Link>
   )
 }
