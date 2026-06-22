@@ -8,22 +8,34 @@
 
   gap: calc(var(--vertical-gap) * 2);
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
-  grid-template-areas: "liveEditor livePreview";
+  grid-template-rows: min-content 1fr;
+  grid-template-areas:
+    "liveEditorLabel livePreviewLabel"
+    "liveEditor livePreview";
 }
 
 @container style(--is-mobile: true) {
   .grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr min-content 1fr;
     grid-template-areas:
+      "liveEditorLabel"
       "liveEditor"
+      "livePreviewLabel"
       "livePreview";
   }
 }
 
+.liveEditorLabel {
+  grid-area: liveEditorLabel;
+}
+
 .liveEditor {
   grid-area: liveEditor;
+}
+
+.livePreviewLabel {
+  grid-area: livePreviewLabel;
 }
 
 .livePreview {
@@ -36,4 +48,9 @@ pre.liveElement,
   background-color: unset !important;
   padding: unset !important;
   margin: unset !important;
+}
+
+/* hint: override react-live, that used style can't override */
+.livePreview > div {
+  height: 100% !important;
 }

@@ -24,6 +24,8 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-live": "^4.1.8",
+    "react-shadow": "^20.6.0",
+    "rehype-mdx-import-media": "^1.4.0",
     "rehype-truncate": "^1.2.2",
     "remark-frontmatter": "^5.0.0",
     "remark-mdx-frontmatter": "^5.2.0",

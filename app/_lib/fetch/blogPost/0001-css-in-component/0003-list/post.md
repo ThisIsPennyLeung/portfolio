@@ -5,10 +5,6 @@ tags:
   - Frontend
 ---
 
-
-
-
-
 Before implement the modal in day 1, you need to know some css layout
 
 - flex https://css-tricks.com/snippets/css/a-guide-to-flexbox/

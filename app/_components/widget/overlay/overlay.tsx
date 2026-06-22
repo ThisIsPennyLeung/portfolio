@@ -54,7 +54,7 @@ export const Overlay = ({
     <div className={joinCss(cssClasses, styles.root)}>
       {before}
       <div className={styles.children}>
-        <Expanded cssClasses={styles.restore}>{children}</Expanded>
+        <Expanded cssClasses={joinCss(styles.restore, overlayAsBackground?styles.overlayAsBackground:"")}>{children}</Expanded>
       </div>
       {after}
     </div>

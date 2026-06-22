@@ -1,6 +1,5 @@
 "use client"
 
-import { List } from "@/app/_components/widget/list/list"
 import { Padding } from "@/app/_components/widget/padding/padding"
 import { joinCss } from "@/app/_lib/utils"
 import {
@@ -10,6 +9,7 @@ import {
   LiveProvider,
   withLive,
 } from "react-live"
+import root from "react-shadow"
 import styles from "./playground.module.css"
 
 export type PlaygroundType = { code: string }
@@ -20,7 +20,16 @@ const Output = withLive(({ live }) => {
   }
 
   // 3. Otherwise, show the preview
-  return <LivePreview className={styles.liveElement} />
+  return (
+    <root.div className={styles.shadowRoot}>
+      <style>{`
+        :host > div { 
+          height: 100%;
+        }
+      `}</style>
+      <LivePreview className={styles.liveElement} />
+    </root.div>
+  )
 })
 
 export const Playground = ({ code }: PlaygroundType) => {
@@ -28,18 +37,18 @@ export const Playground = ({ code }: PlaygroundType) => {
     <div className={joinCss(styles.root)}>
       <Padding>
         <div className={joinCss(styles.grid)}>
-          <LiveProvider code={code}>
+          <LiveProvider code={code} noInline>
+            <div className={joinCss(styles.liveEditorLabel)}>
+              <span>Code:</span>
+            </div>
             <div className={joinCss(styles.liveEditor)}>
-              <List>
-                <span>Code:</span>
-                <LiveEditor className={styles.liveElement} />
-              </List>
+              <LiveEditor className={styles.liveElement} />
+            </div>
+            <div className={joinCss(styles.livePreviewLabel)}>
+              <span>Output:</span>
             </div>
             <div className={joinCss(styles.livePreview)}>
-              <List>
-                <span>Output:</span>
-                <Output />
-              </List>
+              <Output />
             </div>
           </LiveProvider>
         </div>

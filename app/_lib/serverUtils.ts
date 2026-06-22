@@ -1,3 +1,4 @@
+import { useMDXComponents } from "@/mdx-components"
 import { evaluate, EvaluateOptions } from "@mdx-js/mdx"
 import fs from "fs"
 import path from "path"
@@ -5,6 +6,10 @@ import * as jsxRuntime from "react/jsx-runtime"
 import rehypeTruncate from "rehype-truncate"
 import remarkFrontmatter from "remark-frontmatter"
 import remarkMdxFrontmatter from "remark-mdx-frontmatter"
+
+//////////
+// file //
+//////////
 
 export const preventPathTraversal = (dictionaryPath: string): void => {
   const root = path.join(process.cwd())
@@ -51,6 +56,16 @@ const readFile = async (fullPath: string): Promise<string> => {
   return result
 }
 
+///////////
+// image //
+///////////
+
+export const getImageAsBase64 = async (fileFullPath: string) => {
+  const fileBuffer = await fs.promises.readFile(fileFullPath)
+  const base64Image = `data:image/png;base64,${fileBuffer.toString("base64")}`
+  return base64Image
+}
+
 //////////////
 // markdown //
 //////////////
@@ -68,15 +83,18 @@ export const readMarkdown = async <T>(dictionaryPath: string) => {
       const content = await readFile(fullPath)
       const settings: EvaluateOptions = {
         ...jsxRuntime,
+        useMDXComponents: useMDXComponents,
         remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
       }
-      const { frontmatter: meta, default: Content } = await evaluate(
-        content,
-        settings
-      )
+      const { frontmatter: meta, default: Content } = await evaluate(content, {
+        ...settings,
+        ...{ scope: "aaa" },
+      })
       const { default: Truncated } = await evaluate(content, {
         ...settings,
-        ...{ rehypePlugins: [rehypeTruncate] },
+        ...{
+          rehypePlugins: [...(settings.rehypePlugins || []), rehypeTruncate],
+        },
       })
       const result = { meta: { ...(meta as T), fullPath }, Content, Truncated }
       return result

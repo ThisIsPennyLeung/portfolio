@@ -14,3 +14,7 @@
 .restore {
   position: relative;
 }
+
+.overlayAsBackground {
+  overflow: auto;
+}
