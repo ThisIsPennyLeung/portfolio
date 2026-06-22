@@ -33,3 +33,20 @@ export const getBlogPostBySlug = async (slug: string): Promise<BlogPost> => {
 
   return post
 }
+
+export const getBlogsGroupByTags = async (): Promise<
+  Record<string, BlogPost[]>
+> => {
+  const posts = await getAllBlogPosts()
+  const results: Record<string, BlogPost[]> = {}
+
+  for (const post of posts) {
+    for (const tag of post.meta.tags) {
+      const temp = results[tag] || []
+      temp.push(post)
+      results[tag] = temp
+    }
+  }
+
+  return results
+}
