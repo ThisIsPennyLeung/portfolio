@@ -1,0 +1,15 @@
+.root {
+}
+
+/* hint: override react-live, that used style can't override */
+pre.liveElement,
+.liveElement > pre {
+  background-color: unset !important;
+  padding: unset !important;
+  margin: unset !important;
+}
+
+/* hint: override react-live, that used style can't override */
+.livePreview > div {
+  height: 100% !important;
+}

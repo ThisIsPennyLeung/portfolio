@@ -7,11 +7,6 @@ import { ImgHTMLAttributes, LinkHTMLAttributes } from "react"
 import styles from "./mdx-components.module.css"
 
 const components: MDXComponents = {
-  pre: ({ children }) => {
-    const preElement = children.props as React.HTMLAttributes<HTMLPreElement>
-    const code = preElement.children as string
-    return <Playground code={code} />
-  },
   img: async (props: ImgHTMLAttributes<HTMLImageElement>) => {
     // FIXME: turbopack can't dynamic import image
     // TODO: click to zoom
@@ -27,6 +22,7 @@ const components: MDXComponents = {
       </Link>
     )
   },
+  Playground: Playground,
 } satisfies MDXComponents
 
 export const useMDXComponents = (): MDXComponents => {

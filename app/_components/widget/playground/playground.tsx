@@ -1,58 +1,50 @@
 "use client"
 
 import { Padding } from "@/app/_components/widget/padding/padding"
-import { joinCss } from "@/app/_lib/utils"
 import {
-  LiveEditor,
-  LiveError,
-  LivePreview,
-  LiveProvider,
-  withLive,
-} from "react-live"
-import root from "react-shadow"
+  PlaygroundContextProivder,
+  PlaygroundSupportedTypeEnum,
+} from "@/app/_components/widget/playground/playgroundContext/playgroundContext"
+import { PlaygroundEditor } from "@/app/_components/widget/playground/playgroundEditor/playgroundEditor"
+import { PlaygroundOutput } from "@/app/_components/widget/playground/playgroundOutput/playgroundOutput"
+import { joinCss } from "@/app/_lib/utils"
 import styles from "./playground.module.css"
 
-export type PlaygroundType = { code: string }
+export type PlaygroundType = { css: string; html: string }
 
-const Output = withLive(({ live }) => {
-  if (live.error) {
-    return <LiveError className={styles.liveElement} />
-  }
-
-  // 3. Otherwise, show the preview
+export const Playground = ({ css, html }: { css: string; html: string }) => {
   return (
-    <root.div className={styles.shadowRoot}>
-      <style>{`
-        :host > div { 
-          height: 100%;
-        }
-      `}</style>
-      <LivePreview className={styles.liveElement} />
-    </root.div>
-  )
-})
-
-export const Playground = ({ code }: PlaygroundType) => {
-  return (
-    <div className={joinCss(styles.root)}>
-      <Padding>
-        <div className={joinCss(styles.grid)}>
-          <LiveProvider code={code} noInline>
-            <div className={joinCss(styles.liveEditorLabel)}>
-              <span>Code:</span>
+    <PlaygroundContextProivder>
+      <div className={joinCss(styles.root)}>
+        <Padding>
+          <div className={joinCss(styles.grid)}>
+            <div className={joinCss(styles.liveEditorLabelCss)}>
+              <span>Css:</span>
             </div>
-            <div className={joinCss(styles.liveEditor)}>
-              <LiveEditor className={styles.liveElement} />
+            <div className={joinCss(styles.liveEditorCss)}>
+              <PlaygroundEditor
+                type={PlaygroundSupportedTypeEnum.css}
+                value={css}
+              />
+            </div>
+            <div className={joinCss(styles.liveEditorLabelHtml)}>
+              <span>Html:</span>
+            </div>
+            <div className={joinCss(styles.liveEditorHtml)}>
+              <PlaygroundEditor
+                type={PlaygroundSupportedTypeEnum.html}
+                value={html}
+              />
             </div>
             <div className={joinCss(styles.livePreviewLabel)}>
               <span>Output:</span>
             </div>
             <div className={joinCss(styles.livePreview)}>
-              <Output />
+              <PlaygroundOutput />
             </div>
-          </LiveProvider>
-        </div>
-      </Padding>
-    </div>
+          </div>
+        </Padding>
+      </div>
+    </PlaygroundContextProivder>
   )
 }

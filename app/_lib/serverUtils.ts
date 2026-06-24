@@ -88,7 +88,6 @@ export const readMarkdown = async <T>(dictionaryPath: string) => {
       }
       const { frontmatter: meta, default: Content } = await evaluate(content, {
         ...settings,
-        ...{ scope: "aaa" },
       })
       const { default: Truncated } = await evaluate(content, {
         ...settings,

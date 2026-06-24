@@ -8,30 +8,42 @@
 
   gap: calc(var(--vertical-gap) * 2);
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: min-content 1fr;
+  grid-template-rows: min-content min-content min-content min-content;
   grid-template-areas:
-    "liveEditorLabel livePreviewLabel"
-    "liveEditor livePreview";
+    "liveEditorLabelCss livePreviewLabel"
+    "liveEditorCss livePreview"
+    "liveEditorLabelHtml livePreview"
+    "liveEditorHtml livePreview";
 }
 
 @container style(--is-mobile: true) {
   .grid {
     grid-template-columns: 1fr;
-    grid-template-rows: min-content 1fr min-content 1fr;
+    grid-template-rows: min-content min-content min-content min-content min-content 1fr;
     grid-template-areas:
-      "liveEditorLabel"
-      "liveEditor"
+      "liveEditorLabelCss"
+      "liveEditorCss"
+      "liveEditorLabelHtml"
+      "liveEditorHtml"
       "livePreviewLabel"
       "livePreview";
   }
 }
 
-.liveEditorLabel {
-  grid-area: liveEditorLabel;
+.liveEditorLabelCss {
+  grid-area: liveEditorLabelCss;
 }
 
-.liveEditor {
-  grid-area: liveEditor;
+.liveEditorCss {
+  grid-area: liveEditorCss;
+}
+
+.liveEditorLabelHtml {
+  grid-area: liveEditorLabelHtml;
+}
+
+.liveEditorHtml {
+  grid-area: liveEditorHtml;
 }
 
 .livePreviewLabel {
@@ -40,17 +52,4 @@
 
 .livePreview {
   grid-area: livePreview;
-}
-
-/* hint: override react-live, that used style can't override */
-pre.liveElement,
-.liveElement > pre {
-  background-color: unset !important;
-  padding: unset !important;
-  margin: unset !important;
-}
-
-/* hint: override react-live, that used style can't override */
-.livePreview > div {
-  height: 100% !important;
 }
