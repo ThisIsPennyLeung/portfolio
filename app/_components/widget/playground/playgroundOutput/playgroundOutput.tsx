@@ -1,5 +1,6 @@
 "use client"
 
+import { Expanded } from "@/app/_components/widget/expanded/expanded"
 import { LiveError, LivePreview, withLive } from "react-live"
 import root from "react-shadow"
 import styles from "./playgroundOutput.module.css"
@@ -19,5 +20,5 @@ export const PlaygroundOutput = withLive(({ live }) => {
   )
 
   const result = error ? liveError : preview
-  return <div className={styles.root}> {result}</div>
+  return <Expanded cssClasses={styles.root}>{result}</Expanded>
 })

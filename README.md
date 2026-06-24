@@ -1,6 +1,6 @@
-| Latest Build (main) |Latest Deploy|
-| --- | --- |
-| [![Build](https://github.com/ThisIsPennyLeung/portfolio/actions/workflows/build.yml/badge.svg)](https://github.com/ThisIsPennyLeung/portfolio/actions/workflows/build.yml) | [![Deploy](https://github.com/ThisIsPennyLeung/portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/ThisIsPennyLeung/portfolio/actions/workflows/deploy.yml) |
+| Latest Build (main) | Latest Deploy | Link | 
+| --- | --- | --- |
+| [![Build](https://github.com/ThisIsPennyLeung/portfolio/actions/workflows/build.yml/badge.svg)](https://github.com/ThisIsPennyLeung/portfolio/actions/workflows/build.yml) | [![Deploy](https://github.com/ThisIsPennyLeung/portfolio/actions/workflows/deploy.yml/badge.svg)](https://github.com/ThisIsPennyLeung/portfolio/actions/workflows/deploy.yml) | [Website](https://thisispennyleung.dev/) |
 
 ## Roadmap
 

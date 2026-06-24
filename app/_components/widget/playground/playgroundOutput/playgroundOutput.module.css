@@ -1,4 +1,5 @@
 .root {
+  min-height: 150px;
 }
 
 /* hint: override react-live, that used style can't override */
