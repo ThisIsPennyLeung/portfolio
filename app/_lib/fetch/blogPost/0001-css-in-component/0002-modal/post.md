@@ -4,7 +4,6 @@ title: "CSS-in-JS - Day 1, high level design - modal"
 tags:
   - Frontend
 ---
-
 Some people hesitant to touch the UI, it's because:
 - Added some new div into it, all css crash
 - Dead css code
@@ -65,65 +64,57 @@ You need to know some basic css layout
 <br /><br />
 
 #### Now we are try to make something like list
-```
-const Example = () => {
-  return <>
-    <style>{`
-      .myList {
-        height: 100%;
+<Playground
+css={`
+  .myList {
+    height: 100%;
 
-        display: flex;
-        flex-direction: column;
-      }
+    display: flex;
+    flex-direction: column;
+  }
 
-      .header { border: 1px solid black; background: darkorchid; }
-      .content { border: 1px solid black; background: darkgoldenrod; }
-      .footer { border: 1px solid black; background: darkcyan; }
-    `}</style>
-
-    <div className="myList">
-      <div className="header">[Header]</div>
-      <div className="content">[Content]</div>
-      <div className="footer">[Footer]</div>
-    </div>
-  </>
-}
-render(<Example />)
-```
+  .header { border: 1px solid black; background: darkorchid; }
+  .content { border: 1px solid black; background: darkgoldenrod; }
+  .footer { border: 1px solid black; background: darkcyan; }
+`}
+html={`
+  <div className="myList">
+    <div className="header">[Header]</div>
+    <div className="content">[Content]</div>
+    <div className="footer">[Footer]</div>
+  </div>
+`} />
 
 <br /><br />
 
 #### Make the content used up all height
-```
-const Example = () => {
-  return <>
-    <style>{`
-      .myList {
-        height: 100%;
+<Playground
+css={`
+  .myList {
+    height: 100%;
 
-        display: flex;
-        flex-direction: column;
-      }
+    display: flex;
+    flex-direction: column;
+  }
 
-      .content {
-        /* Make the content used up all height */
-        flex-grow: 1;
-      }
+  .content {
+    /* Make the content used up all height */
+    flex-grow: 1;
+  }
 
-      .header { border: 1px solid black; background: darkorchid; }
-      .content { border: 1px solid black; background: darkgoldenrod; }
-      .footer { border: 1px solid black; background: darkcyan; }
-    `}</style>
+  .header { border: 1px solid black; background: darkorchid; }
+  .content { border: 1px solid black; background: darkgoldenrod; }
+  .footer { border: 1px solid black; background: darkcyan; }
+`}
+html={`
+  <div className="myList">
+    <div className="header">[Header]</div>
+    <div className="content">[Content]</div>
+    <div className="footer">[Footer]</div>
+  </div>
+`} />
 
-    <div className="myList">
-      <div className="header">[Header]</div>
-      <div className="content">[Content]</div>
-      <div className="footer">[Footer]</div>
-    </div>
-  </>
-}
-render(<Example />)
-```
+<br /><br />
 
 #### Consider below thing when your using `display: flex`
 - Direction: horizontal or vertical
