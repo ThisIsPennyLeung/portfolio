@@ -20,7 +20,7 @@ export const getAllBlogPosts = async ({
     .map((x) => {
       return { ...x, slug: toSlug(x.meta.title) }
     })
-    .sort((a, b) => a.meta.fullPath.localeCompare(b.meta.fullPath))
+    .sort((a, b) => a.meta.path.localeCompare(b.meta.path))
 
   return result
 }

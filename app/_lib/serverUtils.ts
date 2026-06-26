@@ -1,3 +1,5 @@
+"server only"
+
 import { useMDXComponents } from "@/mdx-components"
 import { evaluate, EvaluateOptions } from "@mdx-js/mdx"
 import fs from "fs"
@@ -25,6 +27,13 @@ const joinPaths = (...paths: string[]): string => {
   return joinedPath
 }
 
+export const getFileName = (pathAndFile: string) => {
+  preventPathTraversal(pathAndFile)
+
+  const result = path.basename(pathAndFile)
+  return result
+}
+
 const getFileNamesInFolderByExtension = async (
   dictionaryPath: string,
   {
@@ -42,7 +51,11 @@ const getFileNamesInFolderByExtension = async (
     await fs.promises.readdir(path, {
       recursive: recursive,
     })
-  ).map((x) => `${path}/${x}`)
+  ).map(
+    (x) =>
+      // Hint: no full path in serverUtils
+      `./${dictionaryPath}/${x}`
+  )
   if (extension) temp = temp.filter((x) => x.endsWith(extension))
 
   const results = temp
@@ -56,14 +69,39 @@ const readFile = async (fullPath: string): Promise<string> => {
   return result
 }
 
-///////////
-// image //
-///////////
+export const createFolder = async (
+  dictionaryPath: string,
+  { ignoreExist = false } = {}
+) => {
+  const isExist = await folderOrFileIsExist(dictionaryPath)
+  if (!isExist && !ignoreExist) return
 
-export const getImageAsBase64 = async (fileFullPath: string) => {
-  const fileBuffer = await fs.promises.readFile(fileFullPath)
-  const base64Image = `data:image/png;base64,${fileBuffer.toString("base64")}`
-  return base64Image
+  const path = joinPaths(process.cwd(), dictionaryPath)
+  preventPathTraversal(path)
+
+  await fs.promises.mkdir(path, { recursive: true })
+}
+
+export const copyFile = async (from: string, to: string) => {
+  const fromPath = joinPaths(process.cwd(), from)
+  preventPathTraversal(fromPath)
+
+  const toPath = joinPaths(process.cwd(), to)
+  preventPathTraversal(toPath)
+
+  await fs.promises.copyFile(fromPath, toPath, fs.constants.COPYFILE_FICLONE)
+}
+
+const folderOrFileIsExist = async (fileOrDictionaryPath: string) => {
+  const path = joinPaths(process.cwd(), fileOrDictionaryPath)
+  preventPathTraversal(path)
+
+  try {
+    await fs.promises.access(path)
+    return true
+  } catch {
+    return false
+  }
 }
 
 //////////////
@@ -74,13 +112,13 @@ export type ReadMarkdownType<T> = Awaited<
   ReturnType<typeof readMarkdown<T>>
 >[number]
 export const readMarkdown = async <T>(dictionaryPath: string) => {
-  const filesFullPath = await getFileNamesInFolderByExtension(dictionaryPath, {
+  const filesPath = await getFileNamesInFolderByExtension(dictionaryPath, {
     extension: "md",
     recursive: true,
   })
   const results = await Promise.all(
-    filesFullPath.map(async (fullPath) => {
-      const content = await readFile(fullPath)
+    filesPath.map(async (path) => {
+      const content = await readFile(path)
       const settings: EvaluateOptions = {
         ...jsxRuntime,
         useMDXComponents: useMDXComponents,
@@ -95,7 +133,11 @@ export const readMarkdown = async <T>(dictionaryPath: string) => {
           rehypePlugins: [...(settings.rehypePlugins || []), rehypeTruncate],
         },
       })
-      const result = { meta: { ...(meta as T), fullPath }, Content, Truncated }
+      const result = {
+        meta: { ...(meta as T), path },
+        Content,
+        Truncated,
+      }
       return result
     })
   )
