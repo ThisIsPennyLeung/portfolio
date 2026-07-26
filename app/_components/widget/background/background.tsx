@@ -12,15 +12,20 @@ const BackgroundImageElement = () => {
       <div></div>
     </Expanded>
   )
+  const image = (
+    <Image
+      src={backgroundImage}
+      alt="Background"
+      fill
+      cssClasses={joinCss(styles.backgroundImage, styles.background)}
+    />
+  )
+
   return (
     <Expanded>
-      <Image
-        src={backgroundImage}
-        alt="Background"
-        fill
-        cssClasses={joinCss(styles.backgroundImage, styles.background)}
-      />
-      {backdrop}
+      <Overlay overlay={backdrop}>
+        {image}
+      </Overlay>
     </Expanded>
   )
 }
