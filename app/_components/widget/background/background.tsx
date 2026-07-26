@@ -23,9 +23,7 @@ const BackgroundImageElement = () => {
 
   return (
     <Expanded>
-      <Overlay overlay={backdrop}>
-        {image}
-      </Overlay>
+      <Overlay overlay={backdrop}>{image}</Overlay>
     </Expanded>
   )
 }
