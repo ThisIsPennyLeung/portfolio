@@ -1,7 +1,7 @@
 import { BlogDetailCard } from "@/app/_components/page/blog/blogDetailCard/BlogDetailCard"
 import { Link } from "@/app/_components/widget/link/link"
 import { List } from "@/app/_components/widget/list/list"
-import { BlogPost, getAllBlogPosts } from "@/app/_lib/fetch/blogPost"
+import { BlogPost } from "@/app/_lib/fetch/blogPost"
 
 const BlogListItem = ({ blogPost }: { blogPost: BlogPost }) => {
   if (!blogPost) throw new Error("BlogListItem: blogPost is undefined")
@@ -13,12 +13,16 @@ const BlogListItem = ({ blogPost }: { blogPost: BlogPost }) => {
   )
 }
 
-export const BlogListPage = async () => {
-  const items = await getAllBlogPosts()
+export const BlogListPage = async ({
+  blogPosts,
+}: {
+  blogPosts: BlogPost[]
+}) => {
+  if (!blogPosts) throw new Error("blogPosts is empty")
 
   return (
     <List>
-      {items.map((x) => (
+      {blogPosts.map((x) => (
         <BlogListItem key={x.slug} blogPost={x} />
       ))}
     </List>
