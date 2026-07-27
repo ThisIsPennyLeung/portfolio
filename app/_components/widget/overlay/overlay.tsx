@@ -42,19 +42,25 @@ export const Overlay = ({
   overlayPosition?: OverlayPosition
 }) => {
   const overlayStyle = calculateOverlayPosition(overlayPosition)
-  const overlayWrapper = (
+  const overlayWrapper = overlay ? (
     <div className={styles.overlay} style={overlayStyle}>
       {overlay}
     </div>
-  )
+  ) : null
   const before = overlayAsBackground ? overlayWrapper : null
   const after = overlayAsBackground ? null : overlayWrapper
 
   return (
     <div className={joinCss(cssClasses, styles.root)}>
       {before}
-      <div className={styles.children}>
-        <Expanded cssClasses={joinCss(styles.restore, overlayAsBackground?styles.overlayAsBackground:"")}>{children}</Expanded>
+      <div
+        className={joinCss(
+          styles.children,
+          styles.restore,
+          overlayAsBackground ? styles.overlayAsBackground : ""
+        )}
+      >
+        {children}
       </div>
       {after}
     </div>

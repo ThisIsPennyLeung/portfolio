@@ -1,0 +1,12 @@
+.root {
+}
+
+.contentPosition {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.backdrop {
+  background-color: var(--overlay-backdrop-color);
+}

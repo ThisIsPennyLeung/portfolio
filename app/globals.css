@@ -16,6 +16,8 @@
   --glass-background-color: rgba(0, 0, 0, 0.3);
   --glass-backdrop-filter: blur(2px);
 
+  --overlay-backdrop-color: rgba(0, 0, 0, 0.6);
+
   color: hsl(0, 0%, 95%);
 
   --font-size: 1.25rem;

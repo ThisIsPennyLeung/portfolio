@@ -3,8 +3,9 @@ import { Link } from "@/app/_components/widget/link/link"
 import { Playground } from "@/app/_components/widget/playground/playground"
 import { copyFile, createFolder, getFileName } from "@/app/_lib/serverUtils"
 import type { MDXComponents } from "mdx/types"
-import { ImgHTMLAttributes, LinkHTMLAttributes } from "react"
+import { HTMLAttributes, ImgHTMLAttributes, LinkHTMLAttributes } from "react"
 import styles from "./mdx-components.module.css"
+import { Padding } from "./app/_components/widget/padding/padding"
 
 const markdownImageFolder = `public/images/markdown/`
 
@@ -27,7 +28,15 @@ const components: MDXComponents = {
     const newPath = await copyMarkdownImage(path)
     if (!props.alt) throw new Error(`Image alt doesn't exist: ${props.src}`)
 
-    return <Image width={300} height={300} alt={props.alt} src={newPath} />
+    return (
+      <Image
+        width={300}
+        height={300}
+        alt={props.alt}
+        src={newPath}
+        canZoom={true}
+      />
+    )
   },
   a: (props: LinkHTMLAttributes<HTMLLinkElement>) => {
     return (
@@ -35,6 +44,9 @@ const components: MDXComponents = {
         {props.children}
       </Link>
     )
+  },
+  p: (props: HTMLAttributes<HTMLParagraphElement>) => {
+    return <Padding direction="vertical">{props.children}</Padding>
   },
   Playground: Playground,
 } satisfies MDXComponents
